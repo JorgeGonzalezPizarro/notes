@@ -8,10 +8,23 @@
 
 class NoteTitle
 {
-
+    private $title;
     public function __construct($title)
     {
         $this->setTitle($title);
     }
-    private function setTitle($title){}
+    private function setTitle($title){
+        if(empty($title) || is_string($title)){
+            return new Error("El texto no debe estar vacio" , 400, null);
+
+        }
+        $this->title=$title;
+
+    }
+
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }

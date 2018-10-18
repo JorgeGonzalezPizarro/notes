@@ -22,9 +22,32 @@ require '../bootstrap.php';
 <h1>Simple Database App</h1>
 
 <ul>
-    <li><a href="http://localhost/notes/createNote"><strong>Create</strong></a> - add a user</li>
+    <li><a  id="boton" href=""><strong>Create</strong></a> - add a user</li>
 
 </ul>
 
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script>
+
+    $("#boton").click(function() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost/notes/createNote',
+            data: {
+                Country: "Japan"
+            },
+            success: function(data) {
+                console.log(data);
+                // $(city).empty();
+                // for (var i = 0; i < data.length; i++) {
+                //     $(city).append('<option id=' + data[i].sysid + ' value=' + data[i].city_name + '>' + data[i].city_name + '</option>');
+
+                }
+            });
+
+        });
+
+</script>
 </html>

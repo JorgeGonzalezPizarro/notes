@@ -54,6 +54,13 @@ class MysqlRepository implements \NoteRepository
 
     public function getNotes()
     {
-        $this->pdo->query();
-    }
+        try {
+            $this->pdo->query('SELECT * from Note')->fetchAll();
+
+        }catch (\Exception $exception){
+            throw new \Exception($exception);
+        }
+        }
+
+
 }

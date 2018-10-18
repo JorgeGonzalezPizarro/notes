@@ -8,14 +8,16 @@
             "" : "src/"
         },
         "classmap" : [
+            "Domain/Notes/Application/GetNotesUseCase.php",
             "Domain/Notes/Application/CreateNoteUseCase.php",
             "Domain/MysqlRepository.php",
             "Domain/Notes/Model/Note.php",
             "Domain/Notes/Model/NoteRepository.php",
             "Domain/Notes/Model/NoteText.php",
-            "Domain/Notes/Model/NoteTitle.php"
-
-
+            "Domain/Notes/Model/NoteTitle.php",
+            "Domain/Notes/Application/CreateNoteHandler.php",
+            "Domain/Notes/Application/CreateNoteCommand.php",
+            "Domain/Notes/Application/CommandHandler.php"
 
         ]
     },

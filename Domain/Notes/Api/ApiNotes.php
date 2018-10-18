@@ -12,28 +12,35 @@ namespace Domain\Notes\Api;
 
 //use Domain\Notes\Application\{CreateNoteUseCase as CreateNoteUseCase};
 
+use Domain\Notes\Application\CreateNoteCommand;
 use Domain\Notes\Application\CreateNoteUseCase;
+use Domain\Notes\Application\GetNotesUseCase;
+use Http\Request;
 
 class ApiNotes
 {
 
-    public function __construct($request,$repository)
+    public function __construct(Request $request,$composite)
     {
 
         $this->request=$request;
-        $this->repository=$repository;
+        $this->composite=$composite;
     }
     public function getNotes(){
-         $content=$this->request->getParameters();
-         $createNoteUseCase=new CreateNoteUseCase($this->repository);
-         $createNoteUseCase->createNote($this->request,$this->request);
 
+        $notes=GetNotesUseCase::getNotes($this->composite);
+        if(!$notes instanceof \Exception){
+            return $notes;
+        }
+        return new \Error("Error al recuperar las notas " , 400, null);
     }
 
     public function createNote(){
         $content=$this->request->getParameters();
-        $createNoteUseCase=new CreateNoteUseCase($this->repository);
-        $createNoteUseCase->createNote('aa','aa');
+        $noteTitle="a";
+        $noteText="b";
+        $createNoteCommand=new CreateNoteCommand($noteTitle,$noteText);
+        $this->composite->__invoke($createNoteCommand);
 
     }
 
