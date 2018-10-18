@@ -43,13 +43,15 @@ class MysqlRepository implements \NoteRepository
     public function createNote($note)
     {
 
-        $this->pdo->prepare('INSERT INTO notes (id,title,text) VALUES(:id,:title,:text)');
-        $this->pdo->exec(array(
+        $sql=$this->pdo->prepare('INSERT INTO notes (id,note_title,note_text) VALUES(:id,:title,:text)');
+        $this->pdo->exec([
             'id'=> $note->getId(),
             'name'=> $note->getNoteTitle(),
             'text'=> $note->getNoteText()
-            )
-        );
+            ]);
+
+
+
     }
 
     public function getNotes()

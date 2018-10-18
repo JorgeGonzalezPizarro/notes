@@ -34,10 +34,12 @@ require '../bootstrap.php';
     $("#boton").click(function() {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost/notes/createNote',
+            url: '/notes/createNote',
             data: {
                 Country: "Japan"
             },
+            dataType: 'text',
+
             success: function(data) {
                 console.log(data);
                 // $(city).empty();

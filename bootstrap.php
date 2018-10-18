@@ -25,7 +25,7 @@ $createNoteHandler=new CreateNoteHandler($createNoteUseCase);
 $dispatcher = \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/notes/createNote', [ApiNotes::class, 'getNotes']);
     $r->addRoute('GET', '/notes/', [ApiNotes::class, 'getNotes']);
-    $r->addRoute('POST', 'http://localhost/notes/createNote', [ApiNotes::class, 'createNote']);
+    $r->post('/notes/createNote', [ApiNotes::class, 'createNote']);
 });
 
 
@@ -45,10 +45,15 @@ switch ($routeInfo[0]) {
 
         $handler =  $routeInfo[1][0];
         $vars = $routeInfo[1][1];
-        if(!$request->getMethod()=='GET') $param=$createNoteHandler;
-        $param=$repository;
+        if($_SERVER['REQUEST_METHOD']!='GET') {
+            $param=$createNoteHandler;
+        }
+        else{
+            $param=$repository;
+        }
        $class = new $handler($request,$param);
        $var1=$class->$vars();
+
 
         break;
 }
