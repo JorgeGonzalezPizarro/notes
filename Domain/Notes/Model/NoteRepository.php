@@ -9,6 +9,6 @@
 interface NoteRepository
 {
 
-    public function createNote();
+    public function createNote($note);
     public function getNotes();
 }
