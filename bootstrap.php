@@ -9,7 +9,7 @@ use App\MysqlRepository;
 use Domain\Notes\Application\CreateNoteHandler;
 use Domain\Notes\Application\CreateNoteUseCase;
 
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 require dirname(__DIR__) . '/notes/vendor/autoload.php';
 require dirname(__DIR__) . '/notes/config/Routes.php';
 require dirname(__DIR__) . '/notes/Domain/Notes/Api/ApiNotes.php';
@@ -17,7 +17,11 @@ require dirname(__DIR__) . '/notes/Domain/Notes/Api/ApiNotes.php';
 require 'config/Dependencies.php';
 $container=new ContainerBuilder();
 
-$routes=new Routes($routerImplementation);
+$host="localhost";
+$user="root";
+$pass="root";
+$db="notes";
+//$routes=new Routes($routerImplementation);
 $repository=MysqlRepository::createDb($host,$user,$pass);
 $createNoteUseCase=new CreateNoteUseCase($repository);
 $createNoteHandler=new CreateNoteHandler($createNoteUseCase);

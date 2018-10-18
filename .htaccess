@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /TESTAPP
+RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ /notes/public/app.php [QSA,L]
 </IfModule>

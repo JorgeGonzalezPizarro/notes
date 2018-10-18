@@ -30,9 +30,11 @@ class ApiNotes
 
         $notes=GetNotesUseCase::getNotes($this->composite);
         if(!$notes instanceof \Exception){
-            return $notes;
+            return json_encode($notes);
         }
-        return new \Error("Error al recuperar las notas " , 400, null);
+        return json_encode(array("aa"=>"aaQ"));
+
+        return header('HTTP/1.1 402 ','',402);
     }
 
     public function createNote(){
@@ -41,7 +43,7 @@ class ApiNotes
         $noteText="b";
         $createNoteCommand=new CreateNoteCommand($noteTitle,$noteText);
         $this->composite->__invoke($createNoteCommand);
-
+        return json_encode(array("aa"=>"aa"));
     }
 
 }

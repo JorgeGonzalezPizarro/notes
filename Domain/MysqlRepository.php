@@ -24,18 +24,18 @@ class MysqlRepository implements \NoteRepository
 
         try{
             // create a PDO connection with the configuration data
-            $pdo = new PDO("mysql:host=127.0.0.1;dbname=notes", $username, $password);
+            $pdo = new PDO("mysql:host=127.0.0.1;dbname=notes", $username, '');
 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // display a message if connected to database successfully
             if($pdo){
-                echo "Connected to the <strong>'notes'</strong> database successfully!";
+                return new self($pdo);
+
             }
         }catch (\PDOException $e){
             // report error message
             echo $e->getMessage();
         }
-        return new self($pdo);
 
     }
 
@@ -60,7 +60,7 @@ class MysqlRepository implements \NoteRepository
             $this->pdo->query('SELECT * from Note')->fetchAll();
 
         }catch (\Exception $exception){
-            throw new \Exception($exception);
+            return new \Exception($exception);
         }
         }
 
