@@ -42,6 +42,7 @@ El flujo de la peticion es la siguiente :
 
   1-Dado una peticion GET/POST para listar o crear notas , se inyecta en el api-controlador directamente al metodo que le 
   pertenece.
+  
   2- Caso GET: 
   
       - Consulta todas los registros almacenados en la base de datos , devuelve la respuesta en caso correcto.
@@ -55,7 +56,7 @@ El flujo de la peticion es la siguiente :
  
  Ambas peticiones se realizan por Ajax desde el archivo app.php
  
-#Dockerfile
+## Descripcion del proyecto PHP 
 
 En caso de querer utilizar un contenedor Docker , se proporciona el fichero Dockerfile . 
 Para crear la imagen : docker build . -t "notes" 
