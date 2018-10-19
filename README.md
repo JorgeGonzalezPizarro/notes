@@ -43,11 +43,24 @@ El flujo de la peticion es la siguiente :
   1-Dado una peticion GET/POST para listar o crear notas , se inyecta en el api-controlador directamente al metodo que le 
   pertenece.
   2- Caso GET: 
+  
       - Consulta todas los registros almacenados en la base de datos , devuelve la respuesta en caso correcto.
-    -Caso POST:
+  
+  -Caso POST:
+  
       - Utiliza el patrón Command para ejecutar un caso de uso createNote (Command -> Handler -> UseCase) , 
       - Utiliza Value Objects para modelar los atributos de la Entidad Note : NoteTitle , NoteText.
       - Genera el objecto en base a éstos atributos y un UUID .
       - Persiste el objeto en la base de datos.
  
  Ambas peticiones se realizan por Ajax desde el archivo app.php
+ 
+#Dockerfile
+
+En caso de querer utilizar un contenedor Docker , se proporciona el fichero Dockerfile . 
+Para crear la imagen : docker build . -t "notes" 
+Ejecutar contenedor : docker run -d -t 8080/80 "notes:lastest" 
+En caso de querer acceder al contenedor : docker exec -it $(contenedor) bash .
+
+
+ 
