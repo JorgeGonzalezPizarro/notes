@@ -15,7 +15,7 @@ class NoteTitle
     }
     private function setTitle($title){
         if(empty($title) || !is_string($title)){
-            return new Error("El texto no debe estar vacio" , 400, null);
+            return new Exception("El texto no debe estar vacio" , 400, null);
 
         }
         $this->title=$title;

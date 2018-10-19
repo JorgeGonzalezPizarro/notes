@@ -20,7 +20,8 @@ use Http\Request;
 
 class ApiNotes
 {
-
+    private $request;
+    private $composite;
     public function __construct(Request $request,$composite)
     {
 
@@ -31,23 +32,17 @@ class ApiNotes
 
         $notes=GetNotesUseCase::getNotes($this->composite);
         if(!$notes instanceof \Exception){
-            return json_encode($notes);
+            return $notes;
         }
-        return json_encode(array("aa"=>"aaQ"));
 
         return header('HTTP/1.1 402 ','',402);
     }
 
     public function createNote(HttpRequest $request){
-        $content=$this->request->getParameters();
-//        $noteTitle="a";
-//        $noteText="b";
-        $noteTitle=$request->getParameter('note_title');
-        $noteText=$request->getParameter('note_text');
-        $createNoteCommand=new CreateNoteCommand($noteTitle,$noteText);
+        $createNoteCommand=new CreateNoteCommand($request);
         if(!$this->composite->__invoke($createNoteCommand) instanceof \Exception){
-            return array('note_title' => $noteTitle,
-                        'note_text' => $noteText);
+            return array('note_title' => $createNoteCommand->getNoteTitle(),
+                        'note_text' => $createNoteCommand->getNoteText());
         };
         return header('No se ha podido realizar la operacion',null , '404');
 

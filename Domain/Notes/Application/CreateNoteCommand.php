@@ -9,14 +9,16 @@
 namespace Domain\Notes\Application;
 
 
+use Http\HttpRequest;
+
 class CreateNoteCommand
 {
     private $noteTitle;
     private $noteText;
-    public function __construct($request)
+    public function __construct(HttpRequest $request)
     {
-        $this->noteTitle="a";
-        $this->noteText="a";
+        $this->noteTitle=$request->getParameter('note_title');
+        $this->noteText=$request->getParameter('note_text');
     }
 
     /**

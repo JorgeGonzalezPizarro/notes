@@ -9,31 +9,20 @@ use App\MysqlRepository;
 use Domain\Notes\Application\CreateNoteHandler;
 use Domain\Notes\Application\CreateNoteUseCase;
 
-//error_reporting(E_ALL);
 require dirname(__DIR__) . '/notes/vendor/autoload.php';
 require dirname(__DIR__) . '/notes/config/Routes.php';
 require dirname(__DIR__) . '/notes/Domain/Notes/Api/ApiNotes.php';
 
 require 'config/Dependencies.php';
-$container=new ContainerBuilder();
 
-$host="localhost";
-$user="root";
-$pass="root";
-$db="notes";
-//$routes=new Routes($routerImplementation);
-$repository=MysqlRepository::createDb($host,$user,$pass);
+$repository=MysqlRepository::createDb($host,$user,$pass,$db);
 $createNoteUseCase=new CreateNoteUseCase($repository);
 $createNoteHandler=new CreateNoteHandler($createNoteUseCase);
 
 $dispatcher = \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/notes/bootstrap.php', [ApiNotes::class, 'getNotes']);
     $r->addRoute('POST', '/notes/bootstrap.php', [ApiNotes::class, 'createNote']);
-//    $r->post('/notes/createNote', [ApiNotes::class, 'createNote']);
 });
-
-
-
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
@@ -57,10 +46,6 @@ switch ($routeInfo[0]) {
        $class = new $handler($request,$param);
         $content=$class->$vars($request);
         header('Content-Type: application/json');
-
         echo json_encode($content);
-
-
         break;
 }
-//echo $noteUseCase;

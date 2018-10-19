@@ -29,15 +29,15 @@ $injector->alias('$request', 'Http\HttpResponse');
 $injector->alias('$request', 'Http\HttpResponse');
 
 $injector->share('Http\HttpResponse');
-$injector->alias('ApiNotes','ApiNotes');
-$injector->define(ApiNotes::class, ['$commandHandler'=> CreateNoteHandler::class]);
+//$injector->alias('ApiNotes','ApiNotes');
+//$injector->define(ApiNotes::class, ['$commandHandler'=> CreateNoteHandler::class]);
 
 $injector->define(ApiNotes::class, ['$request'=> $request]);
 $injector->share(ApiNotes::class);
 
 $host="localhost";
-$db="root";
-$pass="root";
+$user="root";
+$pass="";
 $db="notes";
 
 

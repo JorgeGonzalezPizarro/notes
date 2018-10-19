@@ -72,18 +72,13 @@
             dataType: 'json',
             success: function(response) {
                 var node = document.createElement("td");
-                var node1 = document.createElement("td");
                 var note_title = document.createTextNode(response['note_title'] );
-                // var note_td = document.createTextNode(response['note_text']);
                 var note_text = document.createTextNode(response['note_text']);
                 var br = document.createElement("br");
-
                 var node = document.createElement("td");
-
                 document.getElementById("tbody").appendChild(note_title);
                 document.getElementById("tbody").appendChild(node);
                 document.getElementById("tbody").appendChild(br);
-
                 document.getElementById("tbody").appendChild(note_text);
                 document.getElementById("tbody").appendChild(node);
 
@@ -96,36 +91,28 @@
 </script>
 <script>
 
-    $("#boton").click(function() {
-        var note_title=document.getElementById("note_title").value;
-        var note_text=document.getElementById("note_text").value;
+    $(document).ready(function() {
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: 'bootstrap.php',
-            data: {
-                note_title: note_title,
-                note_text:note_text
-            },
             encode: true,
             dataType: 'json',
             success: function(response) {
-                var node = document.createElement("td");
+                response.forEach(function (element) {
                 var node1 = document.createElement("td");
-                var note_title = document.createTextNode(response['note_title'] );
-                // var note_td = document.createTextNode(response['note_text']);
-                var note_text = document.createTextNode(response['note_text']);
+                var note_title = document.createTextNode(element[0]);
+                var note_text = document.createTextNode(element[1]);
                 var br = document.createElement("br");
-
+                var tr = document.createElement("tr");
                 var node = document.createElement("td");
-
-                document.getElementById("tbody").appendChild(note_title);
-                document.getElementById("tbody").appendChild(node);
-                document.getElementById("tbody").appendChild(br);
-
-                document.getElementById("tbody").appendChild(note_text);
-                document.getElementById("tbody").appendChild(node);
+                    document.getElementById("tbody").appendChild(note_title);
+                    document.getElementById("tbody").appendChild(node);
+                    document.getElementById("tbody").appendChild(br);
+                    document.getElementById("tbody").appendChild(note_text);
+                    document.getElementById("tbody").appendChild(node);
 
 
+                });
             }
         });
 

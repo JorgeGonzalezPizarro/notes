@@ -17,23 +17,20 @@ class MysqlRepository implements \NoteRepository
 
     }
 
-    public static function createDb($host,$username,$password){
+    public static function createDb($host,$username,$password,$db){
 
 // Create connection
 
 
         try{
             // create a PDO connection with the configuration data
-            $pdo = new PDO("mysql:host=127.0.0.1;dbname=notes", $username, '');
-
+            $pdo = new PDO("mysql:host=".$host.";dbname=".$db."", $username, $password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // display a message if connected to database successfully
             if($pdo){
                 return new self($pdo);
 
             }
         }catch (\PDOException $e){
-            // report error message
             echo $e->getMessage();
         }
 
@@ -43,26 +40,23 @@ class MysqlRepository implements \NoteRepository
     public function createNote($note)
     {
 
-//        $sql=$this->pdo->prepare('INSERT INTO notes (id,note_title,note_text) VALUES(:id,:title,:text)');
-//        $this->pdo->exec([
-//            'id'=> $note->getId(),
-//            'name'=> $note->getNoteTitle(),
-//            'text'=> $note->getNoteText()
-//            ]);
-
-        $sql = 'INSERT INTO Note (id,note_title,note_text) VALUES(:id,:title,:text)';
-        $stm = $this->pdo->prepare($sql);
-        $stm->bindParam(':id', $note->getId());
-        $stm->bindParam(':title', $note->getNoteTitle());
-        $stm->bindParam(':text', $note->getNoteText());
-        $stm->execute();
-
+        try {
+            $this->pdo->beginTransaction();
+            $insert = $this->pdo->prepare('INSERT INTO Note (id,note_title,note_text) VALUES(:id,:title,:text)');
+            $insert->bindParam(':id', $note->getId());
+            $insert->bindParam(':title', $note->getNoteTitle());
+            $insert->bindParam(':text', $note->getNoteText());
+            $insert->execute();
+            $this->pdo->commit();
+        }catch (\Exception $exception){
+            return $exception;
+        }
     }
 
     public function getNotes()
     {
         try {
-            $this->pdo->query('SELECT * from Note')->fetchAll();
+          return  $this->pdo->query('SELECT note_title,note_text from Note')->fetchAll();
 
         }catch (\Exception $exception){
             return new \Exception($exception);

@@ -1,0 +1,10 @@
+ CREATE DATABASE `notes` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+
+
+ CREATE TABLE `Note` (
+  `id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note_title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note_text` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

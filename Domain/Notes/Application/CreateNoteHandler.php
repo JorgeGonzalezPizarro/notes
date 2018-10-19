@@ -11,6 +11,7 @@ namespace Domain\Notes\Application;
 
 class CreateNoteHandler implements CommandHandler
 {
+    private $createNoteUseCase;
     public function __construct(CreateNoteUseCase $createNoteUseCase)
     {
         $this->createNoteUseCase=$createNoteUseCase;
