@@ -1,17 +1,15 @@
 # Notes
 
-Aplicacion para registrar y mostrar notas por pantalla.
+Aplicación para registrar y mostrar notas por pantalla.
 
-## Getting Started
+La aplicación permite listar y registrar notas , así como almacenarlas en la base de datos.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
+### Prerequisitos
 
 Se necesitan los siguientes requisitos : PHP > 7.* , Mysql , Composer 
 
 
-### Installing
+### Instalación
 
 Clonar repositorio : cd /project_folder git clone https://github.com/JorgeGonzalezPizarro/notes.git
 
@@ -25,9 +23,9 @@ Acceso : http://SERVERNAME:default_port/notes
 
 
 
-## Descripcion del proyecto PHP 
+## Descripción del proyecto PHP 
 
-El projecto está dividido en 3directorios  
+El proyecto está dividido en directorios  
   - Domain/Notes : 
       -Api : Receptor de la peticion GET/POST 
       
@@ -43,9 +41,9 @@ El projecto está dividido en 3directorios
   
 El fichero /bootstrap.app se encarga de enrutar peticiones GET/POST e inyectar al Api-controller(ApiNote) .
 
-El flujo de la peticion es la siguiente : 
+El flujo de la petición es el siguiente : 
 
-  1-Dado una peticion GET/POST para listar o crear notas , se inyecta en el api-controlador directamente al metodo que le 
+  1-Dado una petición GET/POST para listar o crear notas , se inyecta en el api-controlador directamente al metodo que le 
   pertenece.
   
   2- Caso GET: 
@@ -61,7 +59,7 @@ El flujo de la peticion es la siguiente :
  
  Ambas peticiones se realizan por Ajax desde el archivo app.php
  
-## Descripcion del proyecto PHP 
+## Docker
 
 En caso de querer utilizar un contenedor Docker , se proporciona el fichero Dockerfile . 
 
