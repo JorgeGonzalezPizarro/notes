@@ -21,14 +21,4 @@
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
-  <component name="PhpStepFilterConfiguration">
-    <skipped_functions>
-      <skipped_function name="require" />
-    </skipped_functions>
-    <option name="skippedFunctions">
-      <list>
-        <option value="require" />
-      </list>
-    </option>
-  </component>
 </project>

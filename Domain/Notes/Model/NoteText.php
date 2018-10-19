@@ -26,4 +26,9 @@ class NoteText
     }
 
 
+    public function __toString()
+    {
+        return $this->text;
+    }
+
 }

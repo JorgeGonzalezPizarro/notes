@@ -1,10 +1,4 @@
-<?php
-error_reporting(E_ALL);
 
-require '../bootstrap.php';
-
-
-//?>
 
 <!doctype html>
 <html lang="en">
@@ -69,14 +63,14 @@ require '../bootstrap.php';
         var note_text=document.getElementById("note_text").value;
         $.ajax({
             type: 'POST',
-            url: '/notes/createNote',
+            url: 'notes/bootstrap.php',
             data: {
                 note_title: note_title,
                 note_text:note_text
             },
+            encode: true,
             dataType: 'text',
-
-            success: function(data) {
+            success: function(response) {
                 var node = document.createElement("td");
                 var node1 = document.createElement("td");
                 var note_title = document.createTextNode(data['note_title']);
@@ -85,10 +79,7 @@ require '../bootstrap.php';
                 document.getElementById("tr_notes").appendChild(note_title);
                 document.getElementById("tr_notes").appendChild(note_text);
 
-                console.log(data);
-                // $(city).empty();
-                // for (var i = 0; i < data.length; i++) {
-                //     $(city).append('<option id=' + data[i].sysid + ' value=' + data[i].city_name + '>' + data[i].city_name + '</option>');
+                console.log(response);
 
                 }
             });
@@ -96,4 +87,11 @@ require '../bootstrap.php';
         });
 
 </script>
+<?php
+error_reporting(E_ALL);
+
+//require '../bootstrap.php';
+
+
+//?>
 </html>

@@ -35,7 +35,7 @@ $dispatcher = \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $r
 
 
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
-
+$response=null;
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
         $response->setContent('404 - Page not found');
@@ -56,8 +56,9 @@ switch ($routeInfo[0]) {
             $param=$repository;
         }
        $class = new $handler($request,$param);
-       $var1=$class->$vars();
+       $response= $class->$vars();
 
 
         break;
 }
+return $response;
