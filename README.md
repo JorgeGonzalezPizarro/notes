@@ -30,14 +30,19 @@ Acceso : http://SERVERNAME:default_port/notes
 El projecto está dividido en 3directorios  
   - Domain/Notes : 
       -Api : Receptor de la peticion GET/POST 
+      
       -Application : Casos de uso CreateNote , GetNotes
+      
       -Model : Modelo de dominio y VO de Note
+      
   - Public/ :
       - app.php : Interfaz web / front HTML , utiliza la tecnologia Ajax para hacer peticiones GET/POST.
+      
   - ./bootstrap.app : Middleware de enrutado y generación de dependencias para su inyección
   
   
 El fichero /bootstrap.app se encarga de enrutar peticiones GET/POST e inyectar al Api-controller(ApiNote) .
+
 El flujo de la peticion es la siguiente : 
 
   1-Dado una peticion GET/POST para listar o crear notas , se inyecta en el api-controlador directamente al metodo que le 
@@ -59,9 +64,13 @@ El flujo de la peticion es la siguiente :
 ## Descripcion del proyecto PHP 
 
 En caso de querer utilizar un contenedor Docker , se proporciona el fichero Dockerfile . 
+
 Para crear la imagen : docker build . -t "notes" 
+
 Ejecutar contenedor : docker run -d -t 8080/80 "notes:lastest" 
+
 En caso de querer acceder al contenedor : docker exec -it $(contenedor) bash .
+
 
 
  
