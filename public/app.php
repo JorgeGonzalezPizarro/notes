@@ -32,14 +32,14 @@
 </table>
 
 <table>
-    <tbody>
+    <tbody id="tbody">
     <tr id="tr_notes">
         <td>
-            <label id="title" ></label>
+            <label id="title" >Título</label>
 
         </td>
         <td>
-            <label id="text" ></label>
+            Texto</label>
 
         </td>
 
@@ -63,23 +63,30 @@
         var note_text=document.getElementById("note_text").value;
         $.ajax({
             type: 'POST',
-            url: 'notes/bootstrap.php',
+            url: 'bootstrap.php',
             data: {
                 note_title: note_title,
                 note_text:note_text
             },
             encode: true,
-            dataType: 'text',
+            dataType: 'json',
             success: function(response) {
                 var node = document.createElement("td");
                 var node1 = document.createElement("td");
-                var note_title = document.createTextNode(data['note_title']);
-                var note_text = document.createTextNode(data['note_text']);
-                // node.appendChild(note_text);
-                document.getElementById("tr_notes").appendChild(note_title);
-                document.getElementById("tr_notes").appendChild(note_text);
+                var note_title = document.createTextNode(response['note_title'] );
+                // var note_td = document.createTextNode(response['note_text']);
+                var note_text = document.createTextNode(response['note_text']);
+                var br = document.createElement("br");
 
-                console.log(response);
+                var node = document.createElement("td");
+
+                document.getElementById("tbody").appendChild(note_title);
+                document.getElementById("tbody").appendChild(node);
+                document.getElementById("tbody").appendChild(br);
+
+                document.getElementById("tbody").appendChild(note_text);
+                document.getElementById("tbody").appendChild(node);
+
 
                 }
             });
@@ -87,6 +94,45 @@
         });
 
 </script>
+<script>
+
+    $("#boton").click(function() {
+        var note_title=document.getElementById("note_title").value;
+        var note_text=document.getElementById("note_text").value;
+        $.ajax({
+            type: 'POST',
+            url: 'bootstrap.php',
+            data: {
+                note_title: note_title,
+                note_text:note_text
+            },
+            encode: true,
+            dataType: 'json',
+            success: function(response) {
+                var node = document.createElement("td");
+                var node1 = document.createElement("td");
+                var note_title = document.createTextNode(response['note_title'] );
+                // var note_td = document.createTextNode(response['note_text']);
+                var note_text = document.createTextNode(response['note_text']);
+                var br = document.createElement("br");
+
+                var node = document.createElement("td");
+
+                document.getElementById("tbody").appendChild(note_title);
+                document.getElementById("tbody").appendChild(node);
+                document.getElementById("tbody").appendChild(br);
+
+                document.getElementById("tbody").appendChild(note_text);
+                document.getElementById("tbody").appendChild(node);
+
+
+            }
+        });
+
+    });
+
+</script>
+
 <?php
 error_reporting(E_ALL);
 

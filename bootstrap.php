@@ -27,15 +27,14 @@ $createNoteUseCase=new CreateNoteUseCase($repository);
 $createNoteHandler=new CreateNoteHandler($createNoteUseCase);
 
 $dispatcher = \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/notes/createNote', [ApiNotes::class, 'getNotes']);
-    $r->addRoute('GET', '/notes/', [ApiNotes::class, 'getNotes']);
-    $r->post('/notes/createNote', [ApiNotes::class, 'createNote']);
+    $r->addRoute('GET', '/notes/bootstrap.php', [ApiNotes::class, 'getNotes']);
+    $r->addRoute('POST', '/notes/bootstrap.php', [ApiNotes::class, 'createNote']);
+//    $r->post('/notes/createNote', [ApiNotes::class, 'createNote']);
 });
 
 
 
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
-$response=null;
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
         $response->setContent('404 - Page not found');
@@ -56,9 +55,12 @@ switch ($routeInfo[0]) {
             $param=$repository;
         }
        $class = new $handler($request,$param);
-       $response= $class->$vars();
+        $content=$class->$vars($request);
+        header('Content-Type: application/json');
+
+        echo json_encode($content);
 
 
         break;
 }
-return $response;
+//echo $noteUseCase;
